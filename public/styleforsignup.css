@@ -1,0 +1,208 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    /* background-image: url('images/background.avif'); Background image for the body */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background */
+}
+
+/* Container for layout */
+.container {
+    width: 85%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Header styling */
+.header {
+    display: flex;
+    justify-content: space-between;  /* Space between the two parts */
+    align-items: center;             /* Vertically align items */
+    padding: 20px;
+    background-color: #8e1e38;
+    color: white;
+}
+
+.header .left-section {
+    flex: 1;
+}
+
+.header .right-section {
+    flex: 3;
+    display: flex;
+    justify-content: space-between;  /* Navbar on the left, contact on the right */
+    align-items: center;
+}
+
+/* Logo styling */
+.header .left-section img {
+    max-width: 150px;  /* Adjust based on logo size */
+    height: auto;
+    transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+}
+
+.header .left-section img:hover {
+    transform: scale(0.9); /* Scale down to 90% on hover */
+}
+
+/* Navbar styling */
+.header .navbar ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.header .navbar ul li {
+    margin: 0 20px;
+}
+
+.header .navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.header .navbar ul li a:hover {
+    color: #f0e68c; /* Change link color on hover for better visibility */
+}
+
+/* Signup Section Styling */
+.signup-section {
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Space between form and image */
+    padding: 40px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    max-width: 1200px; /* Updated max-width */
+    margin: 40px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-container {
+    flex: 1;
+    max-width: 50%; /* Adjust width for the form */
+}
+
+.signup-section h2 {
+    text-align: center;
+    color: #8e1e38;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.gender-selection {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.gender-selection label {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Image container styling */
+.image-container {
+    flex: 1;
+    max-width: 45%; /* Adjust width for the image */
+    display: flex;
+    align-items: center; /* Center the image vertically */
+    justify-content: center; /* Center the image horizontally */
+}
+
+.image-container img {
+    max-width: 100%; /* Make sure the image fits the container */
+    border-radius: 8px; /* Add border radius to the image */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow to the image */
+}
+
+/* Input styling */
+.form-group input {
+    width: 100%; /* Full width input */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #8e1e38;
+    outline: none;
+}
+
+.already-account {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.already-account p {
+    font-size: 14px;
+    color: #333;
+}
+
+.already-account a {
+    color: #8e1e38;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.already-account a:hover {
+    text-decoration: underline;
+}
+
+/* Button styling */
+.btn {
+    display: inline-block;
+    padding: 12px;
+    background-color: #8e1e38;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #700a26;
+    transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .signup-section {
+        flex-direction: column; /* Stack form and image vertically on smaller screens */
+        align-items: center;
+    }
+
+    .form-container, .image-container {
+        max-width: 100%;
+    }
+
+    .image-container {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signup-section {
+        padding: 20px 10px;
+    }
+
+    .signup-section h2 {
+        font-size: 24px;
+    }
+}

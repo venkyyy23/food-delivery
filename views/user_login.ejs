@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styleforuserlogin.css"> <!-- Ensure the path is correct -->
+    <title>Login</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="left-section">
+            <a href="/">
+                <img src="/images/food_logo.png" alt="Foodhunter Logo">
+            </a>
+        </div>
+        <div class="right-section">
+            <nav class="navbar">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/aboutus">About Us</a></li>
+                    <li><a href="#">Explore Foods</a></li>
+                    <li><a href="/signup">Register</a></li>
+                    <li><a href="/user_login">User Login</a></li>
+                    <!-- <li><a href="/admin_login">Admin Login</a></li> -->
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="login-container">
+        <div class="login-image">
+            <img src="/images/background_login.jpg" alt="Food Image">
+        </div>
+
+        <div class="login-section">
+            <h2>User Login</h2>
+            <form class="login-form" id="login-form">
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+
+                <!-- CAPTCHA -->
+                <div class="form-group">
+                    <label for="captcha">Please enter the text:</label><br>
+                    <canvas id="captchaCanvas" width="120" height="40"></canvas>
+                    <br>
+                    <input type="text" id="captchaInput" name="captchaInput" placeholder="Enter CAPTCHA" required>
+                    <br><br>
+                    <button type="button" id="refreshCaptcha" class="btn">Refresh CAPTCHA</button>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+            </form>
+
+            <p class="redirect-signup">Don't have an account? <a href="/signup">Sign up here</a>.</p>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // CAPTCHA generation
+            const captchaCanvas = document.getElementById('captchaCanvas');
+            const ctx = captchaCanvas.getContext('2d');
+            let captchaText = '';
+    
+            function generateCaptcha() {
+                captchaText = Math.random().toString(36).substring(2, 8);
+                ctx.clearRect(0, 0, captchaCanvas.width, captchaCanvas.height);
+                ctx.font = '20px Arial';
+                ctx.fillStyle = '#8e1e38';
+                ctx.fillText(captchaText, 10, 25);
+            }
+    
+            document.getElementById('refreshCaptcha').addEventListener('click', generateCaptcha);
+            generateCaptcha(); // Initial CAPTCHA generation
+    
+            // Form submission handling
+            const form = document.getElementById('login-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const enteredCaptcha = document.getElementById('captchaInput').value;
+    
+                if (enteredCaptcha !== captchaText) {
+                    alert('Incorrect CAPTCHA, please try again.');
+                    return;
+                }
+    
+                // Send data to server
+                fetch('/user_login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'server/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Store the JWT token in local storage
+                        localStorage.setItem('token', data.token);
+                        alert('Login successful!');
+                        window.location.href = '/';
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred during login.');
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>

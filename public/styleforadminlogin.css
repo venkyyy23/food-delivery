@@ -1,0 +1,151 @@
+/* General reset and styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 85%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Header styling */
+.header {
+    display: flex;
+    justify-content: space-between;  /* Space between the two parts */
+    align-items: center;             /* Vertically align items */
+    padding: 20px;
+    background-color: #8e1e38;
+    color: white;
+}
+
+.header .left-section {
+    flex: 1;
+}
+
+.header .right-section {
+    flex: 3;
+    display: flex;
+    justify-content: space-between;  /* Navbar on the left, contact on the right */
+    align-items: center;
+}
+
+/* Logo styling */
+.header .left-section img {
+    max-width: 150px;  /* Adjust based on logo size */
+    height: auto;
+    transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+}
+
+.header .left-section img:hover {
+    transform: scale(0.9); /* Scale down to 90% on hover */
+}
+
+/* Navbar styling */
+.header .navbar ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.header .navbar ul li {
+    margin: 0 20px;
+}
+
+.header .navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.header .navbar ul li a:hover {
+    color: #f0e68c; /* Change link color on hover for better visibility */
+}
+
+/* Contact number styling */
+.header .contact {
+    font-size: 18px;
+}
+
+/* Login section styling */
+.login-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+}
+
+.company-photo img {
+    width: 80%;
+    height: auto;
+}
+
+.login-form-container {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #8e1e38;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group input:focus {
+    border-color: #8e1e38;
+    outline: none;
+}
+
+/* Add styles for the refresh button */
+.refresh-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #8e1e38;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.refresh-btn:hover {
+    background-color: #700a26;
+}
+
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #8e1e38;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #700a26;
+}

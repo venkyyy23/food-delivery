@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="explorefoods.css">
+    <style>
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #8e1e38;
+        }
+
+        .header img {
+            height: 50px;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+
+        .navbar li {
+            margin-left: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        /* Cart Icon */
+        .cart {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        /* Cart Dropdown */
+        .cart-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 0;
+            width: 250px;
+            border: 1px solid #ddd;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 100;
+        }
+
+        .cart-dropdown ul {
+            list-style: none;
+            margin: 0;
+            padding: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .cart-dropdown ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .cart-dropdown button {
+            margin: 10px;
+            width: 90%;
+            padding: 10px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cart-dropdown button:hover {
+            background-color: #e05d53;
+        }
+
+        /* Overlay for disabling clicks */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 99;
+        }
+
+        /* Show dropdown on hover */
+        .cart.active .cart-dropdown {
+            display: block;
+        }
+
+        .footer {
+            background-color: #2c2c2c;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .footer-icons i {
+            font-size: 1.5em;
+            margin: 0 10px;
+            color: white;
+        }
+
+        .footer-icons i:hover {
+            color: #8e1e38;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="left-section">
+            <a href="index">
+                <img src="images/food_logo.png" alt="Foodhunter Logo">
+            </a>
+        </div>
+        <div class="right-section">
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index">Home</a></li>
+                    <li><a href="aboutus">About Us</a></li>
+                    <li><a href="explore">Explore Foods</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="index">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="cart" id="cart-icon">
+                🛒 <span class="cart-count" id="cart-count">0</span>
+                <div class="cart-dropdown" id="cart-dropdown">
+                    <ul id="cart-items"></ul>
+                    <button>Order Now</button>
+                </div>
+            </div>
+        </div>
+    </header>   
+    
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Search food here...">
+            <br><button>Search</button>
+        </div>
+
+        <div class="product-grid">
+            <!-- Example food item -->
+            <div class="product-card">
+                <img src="images/rainbow_pizza.jpg" alt="Rainbow Sandwich">
+                <h3>Rainbow Sandwich</h3>
+                <p>Time: 15 - 20 Minutes | Serve 1</p>
+                <div class="price">
+                    <span class="discounted">$5.89</span>
+                    <span class="original">$6.55</span>
+                </div>
+                <button onclick="addToCart('Rainbow Sandwich')">Add To Basket</button>
+            </div>
+
+            <div class="product-card">
+                <img src="images/pepperoni_pizza.jpg" alt="Peperoni Pizza">
+                <h3>Peperoni Pizza</h3>
+                <p>Time: 20 - 25 Minutes | Serve 1</p>
+                <div class="price">
+                    <span class="discounted">$8.93</span>
+                    <span class="original">$10.5</span>
+                </div>
+                <button onclick="addToCart('Peperoni Pizza')">Add To Basket</button>
+            </div>
+
+            <div class="product-card">
+                <img src="images/fried_chicken_salad.jpg" alt="Fried Salad Chicken">
+                <h3>Fried Salad Chicken</h3>
+                <p>Time: 30 - 40 Minutes | Serve 1</p>
+                <div class="price">
+                    <span class="discounted">$14.00</span>
+                    <span class="original">$15.55</span>
+                </div>
+                <button onclick="addToCart('Fried Salad Chicken')">Add To Basket</button>
+            </div>
+
+            <div class="product-card">
+                <img src="images/vegetable_salad.jpg" alt="Green Fried Vegetables Salad">
+                <h3>Green Fried Vegetables Salad</h3>
+                <p>Time: 20 - 25 Minutes | Serve 1</p>
+                <div class="price">
+                    <span class="discounted">$8.28</span>
+                    <span class="original">$9.2</span>
+                </div>
+                <button onclick="addToCart('Green Fried Vegetables Salad')">Add To Basket</button>
+            </div>
+
+            <div class="product-card">
+                <img src="images/yogurt_rice_bowl.jpg" alt="Yogurt Rice Bowl">
+                <h3>Yogurt Rice Bowl</h3>
+                <p>Time: 10 - 15 Minutes | Serve 1</p>
+                <div class="price">
+                    <span class="discounted">$5.27</span>
+                    <span class="original">$5.55</span>
+                </div>
+                <button onclick="addToCart('Yogurt Rice Bowl')">Add To Basket</button>
+            </div>
+
+            <div class="product-card">
+                <img src="images/raspberry.jpg" alt="Rasberry Cheese Sandwich">
+                <h3>Rasberry Chess Sandwich</h3>
+                <p>Time: 20 - 25 Minutes | Serve 1</p>
+                <div class="price">
+                    <span class="discounted">$7.82</span>
+                    <span class="original">$9.2</span>
+                </div>
+                <button onclick="addToCart('Rasberry Cheese Sandwich')">Add To Basket</button>
+            </div>
+        </div>
+
+        <!-- Add more product cards as needed -->
+        </div>
+
+        <div class="pagination">
+            <button>&lt;</button>
+            <button>1</button>
+            <button onclick="window.location.href='explorefoods2.html'">2</button>
+            <button>&gt;</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 Food Hunter. All rights reserved.</p>
+            <ul class="list-inline footer-icons">
+                <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        const cartIcon = document.getElementById('cart-icon');
+        const cartCount = document.getElementById('cart-count');
+        const cartDropdown = document.getElementById('cart-dropdown');
+        const cartItems = document.getElementById('cart-items');
+        let itemCount = 0;
+
+        // Add to cart function
+        function addToCart(itemName) {
+            itemCount++;
+            cartCount.textContent = itemCount;
+
+            const li = document.createElement('li');
+            li.textContent = itemName;
+            cartItems.appendChild(li);
+        }
+
+        // Show cart on hover
+        cartIcon.addEventListener('mouseover', () => {
+            cartDropdown.style.display = 'block';
+        });
+
+        cartIcon.addEventListener('mouseout', () => {
+            cartDropdown.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

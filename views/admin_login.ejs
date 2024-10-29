@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="views\styleforadminlogin.css"> <!-- Ensure the path is correct -->
+</head>
+<body>
+    <header class="header">
+        <div class="left-section">
+            <a href="/">
+                <img src="/images/food_logo.png" alt="Foodhunter Logo">
+            </a>
+        </div>
+        <div class="right-section">
+            <nav class="navbar">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/aboutus">About Us</a></li>
+                    <li><a href="#">Explore Foods</a></li>
+                    <li><a href="/signup">Register</a></li>
+                    <li><a href="/user_login">User Login</a></li>
+                    <li><a href="/admin_login">Admin Login</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="login-section">
+        <div class="company-photo">
+            <img src="/images/admin_login_image.webp" alt="Admin Image">
+        </div>
+
+        <div class="login-form-container">
+            <h2>Admin Login</h2>
+            <form id="admin-login-form" method="POST" action="/admin_login"> <!-- Ensure this matches your backend route -->
+                <div class="form-group">
+                    <input type="text" id="admin-username" name="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="admin-password" name="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <label for="captcha">Captcha: <span id="captcha-question"><%= captchaQuestion %></span></label> <!-- Dynamic captcha question -->
+                    <input type="text" id="captcha-answer" name="captcha" placeholder="Enter answer" required>
+                    <button type="button" id="refresh-captcha" class="refresh-btn">Refresh Captcha</button>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="/admin_login.js"></script> <!-- Ensure the path is correct -->
+</body>
+</html>
